@@ -39,14 +39,15 @@ public class GameView extends JFrame {
         JMenuItem soundItem = new JMenuItem("Sound ON/OFF");
         soundItem.setMnemonic('S');
         gameMenu.add(soundItem);
-        JMenuItem exitItem = new JMenuItem("EXIT");
+        JMenuItem exitItem = new JMenuItem("Exit(Esc)");
         exitItem.setMnemonic('E');
         gameMenu.add(exitItem);
         // create the popup menu, need new JMenuItems
 
         popupMenu = new JPopupMenu();
         popupMenu.add(new JMenuItem("Pause/Continue"));
-        popupMenu.add(new JMenuItem("Exit"));
+        popupMenu.add(new JMenuItem("Sound ON/OFF"));
+        popupMenu.add(new JMenuItem("Exit(Esc)"));
        
         /* CENTER:
          * The panel where 1942 is played

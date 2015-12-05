@@ -19,12 +19,13 @@
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		String command = event.getActionCommand();
-		if (command.equals("Exit")) {
+		if (command.equals("Exit(Esc)")) {
 			view.dispose();
 			System.exit(0);
 		} else if (command.equals("Pause/Continue")) {
 			model.setPause(! model.getPause());
-	}
+		 
+		}
 	}// end of actionPerformed
 	}//end of class gameMenueController
  
