@@ -36,7 +36,12 @@ public class GameView extends JFrame {
         JMenuItem pauseItem = new JMenuItem("Pause/Continue");
         pauseItem.setMnemonic('P');
         gameMenu.add(pauseItem);
-         
+        JMenuItem soundItem = new JMenuItem("Sound ON/OFF");
+        soundItem.setMnemonic('S');
+        gameMenu.add(soundItem);
+        JMenuItem exitItem = new JMenuItem("EXIT");
+        exitItem.setMnemonic('E');
+        gameMenu.add(exitItem);
         // create the popup menu, need new JMenuItems
 
         popupMenu = new JPopupMenu();
@@ -66,15 +71,20 @@ public class GameView extends JFrame {
        
         startPanel = new JPanel();
         startPanel.setLayout(new BorderLayout());
-
-        label = new JLabel("five", JLabel.CENTER);
-        label.setBackground(Color.GREEN);
-        label.setFont(font);
-        label.setOpaque(true);
-        startPanel.add(label, BorderLayout.NORTH);
+        
         button = new JButton("Switch Panels");
         button.setFont(font);
         add(button, BorderLayout.NORTH);
+        //label which has the name of the game
+        
+          font = new Font("Serif", Font.BOLD, 55);
+        label = new JLabel("1942 GAME", JLabel.CENTER);
+        //label.setBackground(Color.GREEN);
+        label.setFont(font);
+        label.setOpaque(false);
+         
+        gamePanel.add(label, BorderLayout.SOUTH);
+        
     }//end of constructor
     
     public void registerListeners(GameMenueController controller1){ 
