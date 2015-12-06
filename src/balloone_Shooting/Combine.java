@@ -1,5 +1,5 @@
 package balloone_Shooting;
-
+//final game
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,22 +7,26 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+
 
 import javax.swing.*;
 
- 
+import Audio.AudioPlayer;
+
 public class Combine extends JPanel implements ActionListener {
 	Image back_Ground;
 	Timer timer;
-	
+	private AudioPlayer music;
+	 
 	private int hits;
 	private JLabel statusBar;
 	Paddle paddle;
 	ArrayList<FireBall> fireballs_array;
-	ArrayList<Cloudball> cloud_array;
+	ArrayList<Missiles> missile_array;
 	FireBall fireBall;
-	 
+	private HashMap<String, AudioPlayer> sfx;
 	private boolean fire;
 
 	public boolean isFire() {
@@ -45,8 +49,14 @@ public class Combine extends JPanel implements ActionListener {
 		
 		ImageIcon ii = new ImageIcon("skybackground.png");
 		
+		 //background music
+		  music = new AudioPlayer("Background.wav") ;
+		  music.play();
+		 sfx = new HashMap<String, AudioPlayer>();
+		 sfx.put("shoot", new AudioPlayer("Missile.wav"));
+		 
 		fireballs_array = new ArrayList<FireBall>();
-		cloud_array = new ArrayList<Cloudball>();
+		missile_array = new ArrayList<Missiles>();
 
 		paddle = new Paddle();
 		setFocusable(true);
@@ -54,11 +64,11 @@ public class Combine extends JPanel implements ActionListener {
 		 
 		timer = new Timer(70, this);
 		timer.start();
-		Thread startCloud = new Thread(new Runnable() {
+		Thread startMissiles = new Thread(new Runnable() {
 			public void run() {
 				while (true)
 					try {
-						cloudBalls();
+						Missiless();
 						Thread.sleep(1000 * 2);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -66,7 +76,7 @@ public class Combine extends JPanel implements ActionListener {
 
 			}
 		});
-		startCloud.start();
+		startMissiles.start();
 		Thread startFire = new Thread(new Runnable() {
 			public void run() {
 				while (true)
@@ -120,10 +130,10 @@ public class Combine extends JPanel implements ActionListener {
 				fireballs_array.remove(k);
 			}
 		}
-		for (int i = 0; i < cloud_array.size(); i++) {
-			cloud_array.get(i).move();
-			if (cloud_array.get(i).getY() > 600) {
-				cloud_array.remove(i);
+		for (int i = 0; i < missile_array.size(); i++) {
+			missile_array.get(i).move();
+			if (missile_array.get(i).getY() > 600) {
+				missile_array.remove(i);
 			}
 		}
 		Thread collide = new Thread(new Runnable() {
@@ -142,10 +152,10 @@ public class Combine extends JPanel implements ActionListener {
 		g.drawImage(back_Ground, 0, 0, null);
 		g.drawImage(paddle.getImage(), paddle.getX(), paddle.getY(), null);
 
-		if (!cloud_array.isEmpty()) {
-			for (int i = 0; i < cloud_array.size(); i++) {
-				g.drawImage(cloud_array.get(i).getImage(), cloud_array.get(i)
-						.getX(), cloud_array.get(i).getY(), null);
+		if (!missile_array.isEmpty()) {
+			for (int i = 0; i < missile_array.size(); i++) {
+				g.drawImage(missile_array.get(i).getImage(), missile_array.get(i)
+						.getX(), missile_array.get(i).getY(), null);
 			}
 		}
 		if (!fireballs_array.isEmpty()) {
@@ -157,11 +167,11 @@ public class Combine extends JPanel implements ActionListener {
 
 	}
 
-	public void cloudBalls() {
+	public void Missiless() {
 		Random rn = new Random();
 		int ran = rn.nextInt(730);
-		Cloudball ball = new Cloudball(ran);
-		cloud_array.add(ball);
+		Missiles ball = new Missiles(ran);
+		missile_array.add(ball);
 
 	}
 
@@ -169,20 +179,21 @@ public class Combine extends JPanel implements ActionListener {
 		fireBall = new FireBall(paddle.getX() + 35);
 		// fireBall.setY(20);
 		fireballs_array.add(fireBall);
+		sfx.get("shoot").play();
 	} 
 
 	public void collision() {
 		for (int k = 0; k < fireballs_array.size(); k++) {
-			for (int j = 0; j < cloud_array.size(); j++) {
+			for (int j = 0; j < missile_array.size(); j++) {
 				Rectangle r1;
 				if(!fireballs_array.isEmpty()){
 					 r1 = fireballs_array.get(k).getBounds();
 					
 				
-				Rectangle r2 = cloud_array.get(j).getBounds();
+				Rectangle r2 = missile_array.get(j).getBounds();
 				if (r1.intersects(r2)) {
 					fireballs_array.remove(k);
-					cloud_array.remove(j);
+					missile_array.remove(j);
 					 hits++;
 					 setStatusBar("Level 1 hits: " + hits );
 				}
