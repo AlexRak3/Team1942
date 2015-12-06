@@ -48,12 +48,17 @@ public class Combine extends JPanel implements ActionListener {
 		addKeyListener(new Action());
 		
 		ImageIcon ii = new ImageIcon("skybackground.png");
-		
-		 //background music
-		  music = new AudioPlayer("Background.wav") ;
-		  music.play();
+		//HashMap for sounds effects
 		 sfx = new HashMap<String, AudioPlayer>();
 		 sfx.put("shoot", new AudioPlayer("Missile.wav"));
+		 sfx.put("explosion", new AudioPlayer("Explosion.wav"));
+		 //background music
+		   music = new AudioPlayer("Background.wav") ;
+		   music.play();
+		   
+	
+		  
+		 
 		 
 		fireballs_array = new ArrayList<FireBall>();
 		missile_array = new ArrayList<Missiles>();
@@ -140,6 +145,7 @@ public class Combine extends JPanel implements ActionListener {
 
 			public void run() {
 				collision();
+				
 			}
 
 		});
@@ -172,13 +178,14 @@ public class Combine extends JPanel implements ActionListener {
 		int ran = rn.nextInt(730);
 		Missiles ball = new Missiles(ran);
 		missile_array.add(ball);
-
+		
 	}
 
 	public void fire() {
 		fireBall = new FireBall(paddle.getX() + 35);
 		// fireBall.setY(20);
 		fireballs_array.add(fireBall);
+		//plays a sound when shoot
 		sfx.get("shoot").play();
 	} 
 
@@ -192,8 +199,11 @@ public class Combine extends JPanel implements ActionListener {
 				
 				Rectangle r2 = missile_array.get(j).getBounds();
 				if (r1.intersects(r2)) {
+					
 					fireballs_array.remove(k);
 					missile_array.remove(j);
+					//plays a sound when a missile hits the jet
+					sfx.get("explosion").play();
 					 hits++;
 					 setStatusBar("Level 1 hits: " + hits );
 				}
