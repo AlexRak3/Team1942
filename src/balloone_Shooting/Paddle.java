@@ -1,23 +1,40 @@
 package balloone_Shooting;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
 public class Paddle {
 	private int x, y;
+	private int width, height;
 	private boolean left = false, right = false;;
-
-	Image jet;
+	private int explosion =0;
+	Image jet,jetExplosion;
 	 ImageIcon big = new ImageIcon("jet.png");
-	
+	 ImageIcon exp = new ImageIcon("jetExplosion.png");
 
 	public Paddle() {
 		x = 395;
-		y = 620;
-		jet = big.getImage();
+		y = 610;
+		 
+			jet = big.getImage();
+			width = jet.getWidth(null);
+			height = jet.getHeight(null);
+		 
+			jetExplosion = exp.getImage();
+			width = jetExplosion.getWidth(null);
+			height = jetExplosion.getHeight(null);
+		 
+		
 	}
-
+	 
+	public int explosion(int i){
+		explosion = i;
+	return explosion;	
+	}
+		 
+	 
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
@@ -25,7 +42,7 @@ public class Paddle {
 	public void setRight(boolean right) {
 		this.right = right;
 	}
-
+	
 	public boolean getLeft() {
 		return left;
 
@@ -43,7 +60,10 @@ public class Paddle {
 	public int getY() {
 		return y;
 	}
-
+	public Image getImageExplosion(){
+		return jetExplosion;
+	}
+	
 	public Image getImage() {
 		return jet;
 	}
@@ -62,15 +82,19 @@ public class Paddle {
 
 	public void jet_Pressed() {
 		
-		y = 620;
+		y = 610;
 		 
 		jet = big.getImage();
 	}
 
 	public void jet_Release() {
 		
-		y = 610;
+		y = 600;
 		jet = big.getImage();
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle( x, y, width, height);
 	}
 
 }

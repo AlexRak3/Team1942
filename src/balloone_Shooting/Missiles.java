@@ -26,7 +26,7 @@ public class Missiles {
 		return y;
 	}
 	public void move() {
-		y++;
+		y+=8;
 	}
 	public Image getImage()
 	{
