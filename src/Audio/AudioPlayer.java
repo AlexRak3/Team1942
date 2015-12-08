@@ -3,10 +3,17 @@ package Audio;
 import java.io.InputStream;
 
 import javax.sound.sampled.*;
-
+/**
+ * makes possible to play.mp3 files as sounds effect
+ * @author Ilya Rakevich && Aaron Hinzey
+ *
+ */
 public class AudioPlayer {
 private Clip clip;
-
+	/**
+	 * One argument constructor 
+	 * @param s name of the audio file
+	 */
 	public AudioPlayer(String s){
 		try{
 			AudioInputStream ais =
