@@ -359,16 +359,16 @@ public class Combine  extends JPanel implements ActionListener {
 		
 		public void keyTyped(KeyEvent e){
 			char ch = e.getKeyChar();
-			if(ch == 'e' || ch == 'E'){
+			if(ch == 'q' || ch == 'Q'){
 				System.exit(0);
 			}else if(ch == 'p' || ch == 'P'){
 				if(pause == false){
-				
 				setPause(true);
-			}else{
+				}else{
 				setPause(false);
+				}
 			}
-		}
+		 
 	 }// end of method keyTyped
  
 	 }//end of class Action
