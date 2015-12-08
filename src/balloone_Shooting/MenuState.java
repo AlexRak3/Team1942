@@ -2,13 +2,16 @@ package balloone_Shooting;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
- 
-
 import TileMap.Background;
+/**
+ * Displays the menu of the game
+ * @author Ilya Rakevich && Aaron Hinzey
+ *
+ */
 public class MenuState extends GameState {
 	private Background bg;
 	//to keep track of selected choice
-	private int currentChoice =0;
+	private int currentChoice =0 ;
 	private String[] options ={"Start", "Help", "Quit"};
 	private Color titleColor;
 	private Font titleFont, font;
@@ -31,8 +34,10 @@ public MenuState(GameStateManager gsm){
 	public void update(){
 		bg.update();
 	}
-	public void draw(Graphics2D g){
-		bg.draw(g);
+	 public void draw(Graphics  g){
+	 
+		 bg.draw(g);
+		  
 		//draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
@@ -52,10 +57,12 @@ public MenuState(GameStateManager gsm){
 	}
 	public void select(){
 		if(currentChoice == 0){
+			gsm.add();
 			  gsm.setState(GameStateManager.LEVEL1STATE);
+			  Game.window.dispose();
 		}
 		if(currentChoice ==1){
-			//help
+			System.out.println("Help");
 		}
 		if(currentChoice == 2){
 			 System.exit(0);
@@ -81,4 +88,6 @@ public MenuState(GameStateManager gsm){
 	public void keyReleased(int k){
 		
 	}
+
+	 
 }

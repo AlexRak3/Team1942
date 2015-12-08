@@ -2,9 +2,12 @@ package balloone_Shooting;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-
+/**
+ * Sets the jet
+ * @author  Ilya Rakevich && Aaron Hinzey
+ *
+ */
 public class Paddle {
 	private int x, y;
 	private int width, height;
@@ -13,7 +16,9 @@ public class Paddle {
 	Image jet,jetExplosion;
 	 ImageIcon big = new ImageIcon("jet.png");
 	 ImageIcon exp = new ImageIcon("jetExplosion.png");
-
+	 /**
+	  * non-argument constructor
+	  */
 	public Paddle() {
 		x = 395;
 		y = 610;
@@ -98,3 +103,4 @@ public class Paddle {
 	}
 
 }
+

@@ -3,7 +3,11 @@ package balloone_Shooting;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-
+/**
+ * Set's jet's fire
+ * @author Ilya Rakevich && Aaron Hinzey
+ *
+ */
 public class FireBall {
 
 	private int x, y;
